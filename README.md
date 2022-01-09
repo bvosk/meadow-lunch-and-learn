@@ -8,21 +8,21 @@ This project requires the [Meadow F7v2 Dev Kit](https://store.wildernesslabs.co/
 
 Follow the [Meadow OS Deployment Guide](http://developer.wildernesslabs.co/Meadow/Getting_Started/Deploying_Meadow/) to flash the latest version of Meadow OS.
 
-Then run these commands to upload the Mono runtime and move them into place:
+Then use `initialize.sh` to upload Mono and deploy the app to the device.
 
 ```shell
-$ meadow mono flash
-$ meadow mono update rt
+$ ./scripts/initialize.sh
 ```
 
-## Run
+This command can take ~10 minutes as all files needed to run the app will
+be uploaded to the device. Subsequent deployments only need to upload files
+which have changed - usually just the main executable.
 
-After making changes, the app needs to be deployed to the device:
+## Deploy and run
+
+After making changes, the app needs to rebuilt and deployed to the device.
+Use `deploy.sh` to run the app on the device:
 
 ```shell
-$ meadow app deploy --file bin/Debug/netstandard2.1/App.dll
+$ ./scripts/deploy.sh
 ```
-
-This will be slow the first time when it uploads all dependencies.
-Subsequent deployments will be much faster because it will skip uploading
-files that have not changed.
